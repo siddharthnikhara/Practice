@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-init-method="gInit" default-destroy-method="gDestroy">
+	<!-- when initialization happens spring will look if any class here implements 
+		BeanPostProcessor if so the it will invoke that class methods before and 
+		after -->
+	<bean class="com.training.bpp.EmployeeBeanProcessor" />
+	<!-- <constructor-arg ref="employee" /> <constructor-arg ref="defaultHello" 
+		/> </bean> -->
+	<bean id="employee" class="com.training.employee.Employee">
+		<!-- init-method="init" destroy-method="destroy"> -->
+		<property name="empId" value="${employee.empId}" />
+		<property name="empName" value="${employee.empname}" />
+		<property name="empSal" value="${employee.empsal}" />
+	</bean>
+	<bean id="pph"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>employeeInformation.properties</value>
+		</property>
+	</bean>
+	<!-- <import resource="applicationContext.xml" /> -->
+</beans>
